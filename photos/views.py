@@ -1,5 +1,8 @@
 from typing import Any
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Photo
@@ -15,11 +18,12 @@ class PhotoDetailView(DetailView):
     template_name = 'photos/photo_detail.html'
     context_object_name = 'photo'
 
-class PhotoCreateView(CreateView):
+class PhotoCreateView(LoginRequiredMixin, CreateView):
     model = Photo
     template_name = 'photos/photo_form.html'
     form_class = PhotoForm
     success_url = reverse_lazy('photos:photo_list')
+    login_url = reverse_lazy('account_login')
 
     # add context data
     def get_context_data(self, **kwargs: Any) -> Any:
@@ -27,11 +31,12 @@ class PhotoCreateView(CreateView):
         context['title'] = 'Subir foto'
         return context
 
-class PhotoUpdateView(UpdateView):
+class PhotoUpdateView(LoginRequiredMixin, UpdateView):
     model = Photo
     template_name = 'photos/photo_form.html'
     form_class = PhotoForm
     success_url = reverse_lazy('photos:photo_list')
+    login_url = reverse_lazy('account_login')
 
      # add context data
     def get_context_data(self, **kwargs: Any) -> Any:
@@ -39,3 +44,8 @@ class PhotoUpdateView(UpdateView):
         context['title'] = 'Actualizar foto'
         return context
 
+@login_required(login_url="account_login")
+def photo_delete(request, pk):
+    photo = get_object_or_404(Photo, pk=pk)
+    photo.delete()
+    return redirect('photos:photo_list')
