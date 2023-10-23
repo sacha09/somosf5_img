@@ -1,0 +1,17 @@
+<header>
+    <nav>
+        <ul>
+          <li><a href="#"><strong>Fotos f5</strong></a></li>
+        </ul>
+        
+        <ul>
+          {% if not user.is_authenticated %}
+          <li><a href="{% url 'account_login' %}" class="outline" role="button">Iniciar sesión</a></li>
+          <li><a href="{% url 'account_signup' %}" role="button">Crear cuenta</a></li>
+          {% else %}
+          <li><a href="#" role="button">Mis favoritos</a></li>
+          <li><a href="{% url 'account_logout' %}" class="outline secondary" role="button">Cerrar sesión</a></li>
+          {% endif %}
+        </ul>
+    </nav>
+</header>
