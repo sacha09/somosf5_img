@@ -5,7 +5,7 @@
 {% block extra_head %}{% endblock %}
 
 {% block content %}
-<h1>Subir foto</h1>
+<h1>{{title}}</h1>
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}

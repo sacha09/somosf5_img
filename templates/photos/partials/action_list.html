@@ -1,9 +1,27 @@
+<div x-data="{ open_modal: false }">
 <details role="list">
     <summary aria-haspopup="listbox" role="button">Acciones</summary>
     <ul role="listbox">
       <li><a href="#">Añadir a mis favoritos</a></li>
       <li><a href="#">Quitar de mis favoritos</a></li>
-      <li><a href="#">Editar imagen</a></li>
-      <li><a href="#">Eliminar imagen</a></li>
+      <li><a href="{% url "photos:photo_update" photo.id %}">Editar imagen</a></li>
+      <li><a x-on:click="open_modal = ! open_modal">Eliminar imagen</a></li>
     </ul>
 </details>
+
+<dialog x-bind:open="open_modal">
+    <article>
+      <header>
+        <a x-on:click="open_modal = ! open_modal" aria-label="Close" class="close"></a>
+      </header>
+      <p>
+        ¿Estas seguro de que quieres eliminar esa foto?
+      </p>
+      <footer>
+        <a href="#cancel" role="button" class="secondary" x-on:click="open_modal = ! open_modal" >Cancelar</a>
+        <a href="" role="button" x-on:click="open_modal = ! open_modal" >Confirmar</a>
+      </footer>
+    </article>
+</dialog>
+
+</div>

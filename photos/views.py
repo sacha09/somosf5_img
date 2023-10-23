@@ -1,6 +1,7 @@
+from typing import Any
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Photo
 from .forms import PhotoForm
 
@@ -19,3 +20,22 @@ class PhotoCreateView(CreateView):
     template_name = 'photos/photo_form.html'
     form_class = PhotoForm
     success_url = reverse_lazy('photos:photo_list')
+
+    # add context data
+    def get_context_data(self, **kwargs: Any) -> Any:
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Subir foto'
+        return context
+
+class PhotoUpdateView(UpdateView):
+    model = Photo
+    template_name = 'photos/photo_form.html'
+    form_class = PhotoForm
+    success_url = reverse_lazy('photos:photo_list')
+
+     # add context data
+    def get_context_data(self, **kwargs: Any) -> Any:
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Actualizar foto'
+        return context
+
