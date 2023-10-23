@@ -1,0 +1,14 @@
+{% load static %}
+<div class="container card">
+    <a href="{% url "photos:photo_detail" photo.id %}">
+    <img
+      src="{{photo.image.url}}"
+    />
+  </a>
+    <h4 class="title">{{photo.title}}</h4>
+    
+    {% if user.is_authenticated %}
+      {% include "photos/partials/action_list.html" %}
+    {% endif %}
+</div>
+<hr>

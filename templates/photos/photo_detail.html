@@ -5,6 +5,11 @@
 {% block extra_head %}{% endblock %}
 
 {% block content %}
-<h1>Foto individual</h1>
+<h1>{{ photo.title }}</h1>
+<img src="{{ photo.image.url }}" alt="{{ photo.title }}">
+
+{% if user.is_authenticated %}
+    {% include "photos/partials/action_list.html" %}
+{% endif %}
 
 {% endblock  %}
