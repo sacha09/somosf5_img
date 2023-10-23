@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Fotos f5{% endblock %}
+
+{% block extra_head %}{% endblock %}
+
+{% block content %}
+<h1>Mis fotos favoritas</h1>
+
+{% if photos %}
+    <div class="row row-example">
+        {% for photo in photos %}
+            <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3">
+            <div class="col-example">{% include "photos/partials/image_card.html"%}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <h4>No tienes ninguna foto como favorita.</h4>
+{% endif %}
+
+{% endblock  %}

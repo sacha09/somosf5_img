@@ -1,9 +1,13 @@
+{% if user.is_superuser %}
 <div x-data="{ open_modal: false }">
 <details role="list">
     <summary aria-haspopup="listbox" role="button">Acciones</summary>
     <ul role="listbox">
-      <li><a href="#">Añadir a mis favoritos</a></li>
-      <li><a href="#">Quitar de mis favoritos</a></li>
+      {% if photo.id in favorite_photos %}
+        <li><a href="{% url "photos:remove_from_favorites" photo.id %}">Quitar de mis favoritos</a></li>
+      {% else %}
+        <li><a href="{% url "photos:add_to_favorites" photo.id %}">Añadir a mis favoritos</a></li>
+      {% endif %}
       <li><a href="{% url "photos:photo_update" photo.id %}">Editar imagen</a></li>
       <li><a x-on:click="open_modal = ! open_modal">Eliminar imagen</a></li>
     </ul>
@@ -23,5 +27,11 @@
       </footer>
     </article>
 </dialog>
-
 </div>
+{% else %}
+    {% if photo.id in favorite_photos %}
+        <a href="{% url "photos:remove_from_favorites" photo.id %}" role="button">Quitar de mis favoritos</a>
+    {% else %}
+        <a href="{% url "photos:add_to_favorites" photo.id %}" role="button">Añadir a mis favoritos</a>
+    {% endif %}
+{% endif %}
