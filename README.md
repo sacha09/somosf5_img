@@ -43,3 +43,15 @@ pip install -r requirements.txt
 ```terminal
 python manage.py migrate
 ```
+
+#### Recolecta los ficheros staticos
+
+```terminal
+python manage.py collectstatic --noinput
+```
+
+#### Crear usuario administrador
+
+```terminal
+python manage.py createsuperuser
+```
