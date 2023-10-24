@@ -10,17 +10,18 @@ Como desarrollador en solitario en entorno local y sin deployment no hago branch
 
 En proyecto con deployment suelo tener tres branche (main, rc/testing, development).  El trabajo a diario se hace en development, y se van haciendo merges, a rc (release candidate) donde se hacen las pruebas, y main que va a deployment.
 
+Si el desarrollo es en equipo se hacen new function branches desde development y luego se hacen merges.
+
 ### Stack
 
-- Web Framework: Django (Full-Stack , MVC design, serverside rendering, ORM incluido, templating incluido, admin incluido, robusto, escalable)
+- Web Framework: Django (Full-Stack , MVC, serverside rendering, ORM incluido, templating incluido, admin panel incluido, robusto, escalable, API friendly)
 - Base de datos: sqlite (SQL en un archivo, perfecto para fast prototyping)
 - Libreria CSS: picoCSS (libreria minimalista para HTML semántico)
 - Libreria JS: AlpineJS (ligero, simple y poderoso, con sintaxis inspirado en vuejs)
 
+### Permisos dentro de la app
 
-### Permisos
-
-- Los superusuarios pueden subir, modificar y eliminar fotos.
+- Los usuarion admin (superusuarios) pueden subir, modificar y eliminar fotos.
 - Los usuarios registrados pueden marcar fotos como favoritas y tambien desmarcarlas.
 - Los usuarios no registrados pueden ver las fotos.
 
@@ -71,7 +72,7 @@ python manage.py migrate
 python manage.py collectstatic --noinput
 ```
 
-#### Crear usuario administrador
+#### Crear usuario administrador (superusuario)
 
 ```terminal
 python manage.py createsuperuser
